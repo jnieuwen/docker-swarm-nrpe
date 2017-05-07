@@ -15,7 +15,7 @@ then
     fi
 
     HASLEADER=0
-    for node in $(docker node ls | cut -c30- | sed -e '1d' -e 's/ .*//')
+    for node in $(docker node ls | cut -c30- | sed -e '1d' -e 's/^ //' -e 's/ .*//')
     do
     	NODESTATUS=$(docker node inspect "${node}" --format "{{ .Status.State }}")
     	if [ "x${NODESTATUS}" != 'xready' ]
